@@ -1,0 +1,89 @@
+<!DOCTYPE=html>
+<head>
+	<title>
+	Final Project-UVI
+	</title>
+	<style type="text/css">
+		body{
+			background-color: lightblue;
+			color:darkorange;
+			text-align: center ;
+			font-family:Arial,"DFKai-sb",fantasy;
+			font-weight: bold;
+
+		}
+	</style>
+</head>
+<body>
+	<h1>UVI Level in differents cities</h1>
+	<p>小提醒：當uvi指數太高時,請務必要有防護措施,如擦防曬乳,撐陽傘等,否則可是會曬傷的喔！</p>
+	UVI Level: <input type="text" id="ul" name="UVILevel" value="UVI"><br>
+<button type="clickme" onclick="showinfo()">Click</button> 
+
+
+	<table class="table">
+	 <thead>
+	 	<tr>
+	 		<th scope="col" >SiteName </th>
+	 		<th scope="col" >UVI </th>
+	 		<th scope="col" >PublishAgency </th>
+			<th scope="col" >WGS84Lon</th>
+			<th scope="col" >County</th>
+			<th scope="col" >WGS84Lat</th>
+			<th scope="col" >PublishTime</th>
+		</tr>	
+	</thead>
+	<tbody>
+		{% for data in datas %}
+		<tr>
+			<td>{{data.SiteName}}</td>
+			<td>{{data.UVI}}</td>
+			<td>{{data.PublishAgency}}</td>
+			<td>{{data.WGS84Lon}}</td>
+			<td>{{data.County}}</td>
+			<td>{{data.WGS84Lat}}</td>
+			<td>{{data.PublishTime}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>		
+	</table>
+	<form action="" method="GET">
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+		<label class="input-group-text" for="inputGroupSelect01">Select area</label>
+	
+			
+		</div>
+		<select class="UVI-select" name="SiteName">
+			<option selected>All datas</option>
+			{% for data in datas %}
+			<option value="{{data.SiteName}}">{{data.SiteName}}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+ 
+<script type="text/javascript">
+	function showinfo(){
+		var uvi=document.getElementById("ul").value;
+		if(uvi<3){
+			alert("可以安心外出")
+		}if(uvi>=3 && uvi<8){
+			alert("須保護措施,且建議外出時待在陰影處")
+
+		}if(uvi>=8){
+			alert("須保護措施,且建議最好不要外出")
+		}
+		alert("提醒您uvi各指數：\n0~2:可以安心外出\n3~7:須保護措施,且建議外出時待在陰影處\n8~11:須保護措施,且建議最好不要外出")
+	}
+
+</script>
+<script type="text/javascript">
+		var today= new Date();
+		var h= today.getHours();
+		var m=today.getMinutes();
+		var s=today.getSeconds();
+		document.write("Now time:"+today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate()+"/"+h+":"+m+":"+s);
+</script>
+</body>
